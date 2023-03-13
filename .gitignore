@@ -1,0 +1,7 @@
+.env
+.DS_Store
+.devcontainer
+/cert/idp_cert.pem
+/cert/certificate.crt
+/cert/privateKey.key
+/node_modules/*
