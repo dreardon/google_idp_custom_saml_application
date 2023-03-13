@@ -20,6 +20,7 @@ This is not an officially supported Google product
 1. Add any attribute mappings that you require (for this example I included the first name and last name attributes)
 1. Enable the application for everyone, certain Organization Units, or Groups according to this documentation. Please review "Turn on your SAML app" in this [document.](https://support.google.com/a/answer/6087519?hl=en&fl=1)
     * If the application is not enabled for a user, they will experience an "app_not_configured_for_user" error such as this.
+
 ![App Not Configured for User](images/app_not_configured.png)
 
 When you're complete, you'll have a properly configured custom SAML application
