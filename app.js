@@ -11,6 +11,7 @@ var saml = require('@node-saml/passport-saml');
 require('dotenv').config()
 
 var app = express();
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/static'));
 
 passport.serializeUser(function(user, done) {
@@ -27,6 +28,8 @@ var samlStrategy = new saml.Strategy({
   issuer: process.env.SAML_ISSUER || 'http://localhost:8080',
   cert: fs.readFileSync(__dirname + '/cert/idp_cert.pem', 'utf8'),
   wantAuthnResponseSigned: false,
+  additionalParams: {"AdditionalParamsKey":"AdditionalParamsValue"},
+  additionalAuthorizeParams: {"additionalAuthorizeParamsKey":"additionalAuthorizeParamsValue"}
   }, 
   function(profile, done) {
     console.log('profile');
@@ -54,14 +57,14 @@ function ensureAuthenticated(req, res, next) {
 
 app.get('/',
   function(req, res) {
-    res.sendFile(__dirname + "/static/index.html");
+    res.render('pages/index');
   }
 );
 
 app.get('/home',
   ensureAuthenticated, 
   function(req, res) {
-    res.sendFile(__dirname + "/static/home.html");
+    res.render('pages/home', {profile: req.user});
   }
 );
 
